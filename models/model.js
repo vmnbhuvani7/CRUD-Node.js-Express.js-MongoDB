@@ -1,19 +1,23 @@
 const mongoose = require('mongoose')
 
-const alienSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
-    tech:{
+    email: {
         type: String,
         required: true,
     },
-    sub:{
+    complete: {
         type: Boolean,
         // required: true,
-        default:false
+        default: false
+    },
+    date: {
+        type: Date,
+        default: Date.now()
     }
 })
 
-module.exports = mongoose.model('Alien',alienSchema)
+module.exports = mongoose.model('Task', taskSchema)

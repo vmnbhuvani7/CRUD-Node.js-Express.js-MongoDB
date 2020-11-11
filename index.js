@@ -1,19 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const url = "mongodb://localhost:27017/crudEx"
+const Router = require('./routes/urls')
+require("dotenv").config();
 
 const app = express()
 
-mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, findOneAndUpdate: true })
-    .then(() => console.log("connection success."))
+mongoose.connect(process.env.DB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(() => console.log("connection success...."))
     .catch((err) => console.log(err))
 
 app.use(express.json())
 
-const aliensRouter = require('./routes/urls')
+app.use('/', Router)
 
-app.use('/aliens', aliensRouter)
-
-app.listen(8000, () => {
-    console.log("server started.");
+app.listen(process.env.PORT, () => {
+    console.log("server started...");
 })
